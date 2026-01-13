@@ -1,0 +1,10 @@
+requests
+lxml
+chromadb
+openai
+python-dotenv
+gradio
+fastapi
+uvicorn
+jinja2
+pydantic

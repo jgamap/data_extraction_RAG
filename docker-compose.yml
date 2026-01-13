@@ -1,0 +1,20 @@
+services:
+  web:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - GROBID_URL=http://grobid:8070
+      - PERSIST_DIR=/data/rag_db
+      - UPLOAD_DIR=/data/uploads
+    volumes:
+      - ./data:/data
+    depends_on:
+      - grobid
+
+  grobid:
+    image: grobid/grobid:0.8.2-full
+    platform: linux/amd64
+    ports:
+      - "8070:8070"

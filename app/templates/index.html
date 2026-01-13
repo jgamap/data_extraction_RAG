@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Outbreak Investigations - RAG</title>
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <h1>Outbreak Investigations - RAG</h1>
+      <p class="muted">Created by Jovenal Gama-Pinto.</p>
+    </div>
+  </header>
+
+  <main class="layout" aria-label="Application">
+    <!-- LEFT: Controls -->
+    <aside id="sidebar" class="panel sidebar" aria-label="Controls sidebar">
+      <div class="panel-header">
+        <div>
+          <div class="panel-title">Controls</div>
+          <div class="panel-subtitle muted">Index, settings, conversations</div>
+        </div>
+        <button id="toggleSidebarBtn" class="btn secondary" type="button">Hide</button>
+      </div>
+
+      <section class="section">
+        <h2 class="section-title">Settings</h2>
+
+        <label class="field">
+          <span class="label">Chroma persist directory</span>
+          <input id="persistDir" type="text" value="./rag_db" />
+        </label>
+
+        <label class="field">
+          <span class="label">Collection name</span>
+          <input id="collectionName" type="text" value="papers" />
+        </label>
+
+        <label class="field">
+          <span class="label">Top-k (contexts)</span>
+          <input id="k" type="number" min="1" max="20" value="5" />
+        </label>
+
+        <label class="field checkbox">
+          <input id="showContext" type="checkbox" checked />
+          <span>Attach retrieved sources to assistant replies</span>
+        </label>
+      </section>
+
+      <div class="divider"></div>
+
+      <section class="section">
+        <h2 class="section-title">Ingest PDFs</h2>
+        <p class="muted small">Upload PDFs and run: PDF → TEI → chunks → index.</p>
+
+        <input id="pdfFiles" type="file" accept="application/pdf" multiple />
+        <div class="row">
+          <button id="indexBtn" class="btn secondary" type="button">Process &amp; Index</button>
+        </div>
+
+        <pre id="indexStatus" class="status" aria-live="polite"></pre>
+      </section>
+
+      <div class="divider"></div>
+
+      <section class="section">
+        <div style="margin-bottom: 12px;">
+            <div class="row space-between">
+              <h2 class="section-title" style="margin:0;">Conversations</h2>
+              <button id="newChatBtn" class="btn secondary" type="button">New</button>
+            </div>
+        </div>
+        <div id="convoList" class="convo-list" aria-label="Conversation list"></div>
+
+        <div style="margin-top: 12px;">
+            <div class="row">
+              <button id="renameChatBtn" class="btn secondary" type="button">Rename</button>
+              <button id="deleteChatBtn" class="btn secondary danger" type="button">Delete</button>
+            </div>
+        </div>
+      </section>
+    </aside>
+
+    <!-- RIGHT: Chat -->
+    <section class="panel main" aria-label="Chat panel">
+      <div class="main-header">
+        <div class="main-title">Chat</div>
+        <div class="main-actions">
+          <button id="clearBtn" class="btn secondary" type="button">Clear</button>
+        </div>
+      </div>
+
+      <!-- Floating restore button (visible only when sidebar is collapsed) -->
+      <button id="showSidebarFloatingBtn" class="btn secondary floating-toggle" type="button" hidden>
+        Show controls
+      </button>
+
+      <div id="error" class="error" hidden></div>
+
+      <div id="chat" class="chat" aria-live="polite"></div>
+
+      <form id="askForm" class="ask-form" autocomplete="off">
+        <input id="message" type="text" placeholder="Ask something about your indexed documents…" required />
+        <button class="btn primary" type="submit">Send</button>
+      </form>
+    </section>
+  </main>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
