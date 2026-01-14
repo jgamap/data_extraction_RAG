@@ -16,11 +16,11 @@ GROBID must be instantiated and run using [Docker](https://www.docker.com). You 
 Run this in your terminal:
 
 ```
-> pip install -r requirements.txt
+pip install -r requirements.txt
 ```
 **Set your OpenAI API key**
 ```
-> export OPENAI_API_KEY=your_api_key_value
+export OPENAI_API_KEY=your_api_key_value
 ```
 **Set up your `.dockerignore` file**
 Add any file or directory that is not needed for the app
