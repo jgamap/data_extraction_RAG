@@ -37,11 +37,11 @@ __pycache__
 ```
 **Build your app image using docker**
 ```
-run docker compose build
+docker compose build
 ```
 
 **Start all services**
 ```
-run docker compose up
+docker compose up
 ```
 Your paper extraction app can now be assessed through Docker Desktop app or at http://localhost:8000
